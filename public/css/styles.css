@@ -1,0 +1,132 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.banner {
+  position: relative;
+  height: 300px;
+  background-image: url('../assets/food.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 黑色遮罩，50% 透明 */
+}
+
+.banner-title {
+  color: white;
+  font-size: 36px;
+  text-align: center;
+  z-index: 1;
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+}
+
+nav h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+#search-section {
+  margin: 20px auto;
+  text-align: center;
+}
+
+#search-input {
+  padding: 10px;
+  width: 500px; /* 寬大輸入框 */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px; /* 圓角邊框 */
+}
+
+#search-btn, #favorite-btn, #prev-btn, #next-btn {
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+#search-btn:hover, #favorite-btn:hover, #prev-btn:hover, #next-btn:hover {
+  background-color: #0056b3;
+}
+
+#prev-btn:disabled, #next-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.add-btn {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.add-btn:hover {
+  background-color: darkblue;
+}
+
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+#pagination {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#page-info {
+  font-size: 16px;
+}
+
+#loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#loading img {
+  width: 50px;
+  height: 50px;
+}
