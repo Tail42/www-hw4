@@ -4,9 +4,25 @@ body {
   padding: 0;
 }
 
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+nav h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
 .banner {
   position: relative;
-  height: 300px;
+  height: 400px;
   background-image: url('../assets/food.jpg');
   background-size: cover;
   background-position: center;
@@ -21,61 +37,79 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 黑色遮罩，50% 透明 */
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.banner-content {
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .banner-title {
   color: white;
   font-size: 36px;
+  font-weight: bold;
   text-align: center;
-  z-index: 1;
   margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-nav {
+.search-bar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  color: white;
-  padding: 10px 20px;
-}
-
-nav h1 {
-  margin: 0;
-  font-size: 24px;
-}
-
-#search-section {
-  margin: 20px auto;
-  text-align: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 #search-input {
-  padding: 10px;
-  width: 500px; /* 寬大輸入框 */
+  padding: 12px;
+  width: 600px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px; /* 圓角邊框 */
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
 }
 
-#search-btn, #favorite-btn, #prev-btn, #next-btn {
-  padding: 10px 20px;
-  margin-left: 10px;
+#search-input:focus {
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#search-btn, #favorite-btn, #prev-btn, #next-btn, #back-btn {
+  padding: 12px 24px;
   cursor: pointer;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
-#search-btn:hover, #favorite-btn:hover, #prev-btn:hover, #next-btn:hover {
+#search-btn:hover, #favorite-btn:hover, #prev-btn:hover, #next-btn:hover, #back-btn:hover {
   background-color: #0056b3;
 }
 
 #prev-btn:disabled, #next-btn:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
+}
+
+#error-message {
+  color: #ff4d4d;
+  font-size: 14px;
+  margin-top: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#error-message.show {
+  opacity: 1;
 }
 
 .add-btn {
@@ -107,6 +141,14 @@ th {
   background-color: #f2f2f2;
 }
 
+tr {
+  cursor: pointer;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
 #pagination {
   margin: 20px 0;
   display: flex;
@@ -129,4 +171,107 @@ th {
 #loading img {
   width: 50px;
   height: 50px;
+}
+
+#food-details {
+  width: 80%;
+  margin: 40px auto;
+}
+
+#back-btn {
+  margin-bottom: 20px;
+}
+
+#food-name {
+  font-size: 28px;
+  color: #333;
+  text-align: center;
+  margin: 20px 0;
+}
+
+#pie-chart {
+  text-align: center;
+}
+
+#pie-chart h3 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+#serving-select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+#calories {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#nutrition-chart {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.legend div {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.legend span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .banner {
+    height: 350px;
+  }
+
+  .banner-title {
+    font-size: 24px;
+  }
+
+  #search-input {
+    width: 80%;
+    max-width: 400px;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #search-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  #nutrition-chart {
+    max-width: 150px;
+    max-height: 150px;
+  }
 }

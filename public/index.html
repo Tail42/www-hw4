@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Food Nutrition Search</title>
   <link rel="stylesheet" href="css/styles.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <!-- Navigation Bar -->
@@ -13,36 +15,54 @@
     <button id="favorite-btn">Favorites List</button>
   </nav>
 
-  <!-- Banner Section with Search -->
-  <header class="banner">
-    <div class="banner-overlay"></div>
-    <div style="position: relative; z-index: 1; text-align: center;">
-      <h1 class="banner-title">Find Nutrition Information for Your Food!</h1>
-      <div id="search-section" style="margin-top: 20px;">
-        <input type="text" id="search-input" placeholder="Enter food name">
-        <button id="search-btn">Search</button>
-        <p id="error-message" style="color: red; display: none; margin-top: 10px;">Input field cannot be empty!</p>
+  <!-- Main Content (Banner and Results) -->
+  <div id="main-content">
+    <!-- Banner Section -->
+    <header class="banner">
+      <div class="banner-overlay"></div>
+      <div class="banner-content">
+        <h1 class="banner-title">Find Nutrition Information for Your Food!</h1>
+        <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Enter food name">
+          <button id="search-btn">Search</button>
+        </div>
+        <p id="error-message" style="display: none;">Input field cannot be empty!</p>
+      </div>
+    </header>
+
+    <!-- Results Table -->
+    <div id="results-section" style="display: none;">
+      <table id="results-table">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="results-body"></tbody>
+      </table>
+      <div id="pagination">
+        <button id="prev-btn" disabled>Previous</button>
+        <span id="page-info"></span>
+        <button id="next-btn">Next</button>
       </div>
     </div>
-  </header>
+  </div>
 
-  <!-- Results Table -->
-  <div id="results-section" style="display: none;">
-    <table id="results-table">
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="results-body"></tbody>
-    </table>
-    <div id="pagination">
-      <button id="prev-btn" disabled>Previous</button>
-      <span id="page-info"></span>
-      <button id="next-btn">Next</button>
+  <!-- Food Details Page -->
+  <div id="food-details" style="display: none;">
+    <button id="back-btn">Back</button>
+    <h2 id="food-name"></h2>
+    <div id="pie-chart">
+      <h3>Nutrition Information</h3>
+      <select id="serving-select"></select>
+      <p id="calories">Calories: 0 kcal</p>
+      <div class="chart-container">
+        <canvas id="nutrition-chart"></canvas>
+        <div class="legend"></div>
+      </div>
     </div>
   </div>
 
