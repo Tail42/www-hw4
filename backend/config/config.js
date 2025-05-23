@@ -1,8 +1,9 @@
+require('dotenv').config();
+
 module.exports = {
   fatSecret: {
-    clientId: '60ebc8b9703a4299a750c8e4cb92dfcf', 
-    clientSecret: 'fbcb100941d942a5a1f2d6ec2224ee49',
-    tokenUrl: 'https://oauth.fatsecret.com/connect/token',
+    consumerKey: process.env.FATSECRET_CONSUMER_KEY,
+    consumerSecret: process.env.FATSECRET_CONSUMER_SECRET,
     apiUrl: 'https://platform.fatsecret.com/rest/server.api'
   }
 };

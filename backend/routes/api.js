@@ -1,41 +1,18 @@
 const express = require('express');
-const axios = require('axios');
+const OAuth = require('oauth').OAuth;
 const config = require('../config/config');
 
 const router = express.Router();
 
-// 取得 Access Token
-async function getAccessToken() {
-  try {
-    console.log('正在請求 Access Token...');
-    const response = await axios.post(
-      config.fatSecret.tokenUrl,
-      new URLSearchParams({
-        grant_type: 'client_credentials',
-        scope: 'basic'
-      }).toString(),
-      {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Accept': 'application/json'
-        },
-        auth: {
-          username: config.fatSecret.clientId,
-          password: config.fatSecret.clientSecret
-        }
-      }
-    );
-    console.log('Access Token 請求成功:', response.data);
-    return response.data.access_token;
-  } catch (error) {
-    console.error('無法獲取 Access Token:', {
-      status: error.response?.status,
-      data: error.response?.data,
-      message: error.message
-    });
-    throw new Error('無法獲取 Access Token');
-  }
-}
+const oa = new OAuth(
+  null, // request token URL (not needed)
+  null, // access token URL (not needed)
+  config.fatSecret.consumerKey,
+  config.fatSecret.consumerSecret,
+  '1.0',
+  null,
+  'HMAC-SHA1'
+);
 
 // 搜尋食物
 router.get('/search', async (req, res) => {
@@ -44,33 +21,32 @@ router.get('/search', async (req, res) => {
     return res.status(400).json({ error: 'Search query cannot be empty' });
   }
 
+  const url = `${config.fatSecret.apiUrl}?method=foods.search&format=json&search_expression=${encodeURIComponent(query)}&page_number=${page}&max_results=${max_results}`;
+
   try {
-    const accessToken = await getAccessToken();
     console.log('正在搜尋食物:', { query, page, max_results });
-    const response = await axios.get(config.fatSecret.apiUrl, {
-      params: {
-        method: 'foods.search',
-        format: 'json',
-        search_expression: query,
-        page_number: page,
-        max_results: max_results
-      },
-      headers: {
-        Authorization: `Bearer ${accessToken}`
+    oa.get(url, null, null, (err, data) => {
+      if (err) {
+        console.error('搜尋失敗:', {
+          status: err.statusCode,
+          data: err.data,
+          message: err.message
+        });
+        return res.status(500).json({
+          error: 'Search failed',
+          details: err.data || err.message
+        });
       }
+      console.log('搜尋成功:', data);
+      res.json(JSON.parse(data));
     });
-    console.log('搜尋成功:', response.data);
-    res.json(response.data);
   } catch (error) {
     console.error('搜尋失敗:', {
-      status: error.response?.status,
-      data: error.response?.data,
       message: error.message
     });
-    const errorMessage = error.response?.data?.error?.message || error.message;
     res.status(500).json({
       error: 'Search failed',
-      details: errorMessage
+      details: error.message
     });
   }
 });
@@ -78,30 +54,32 @@ router.get('/search', async (req, res) => {
 // 取得食物詳細資訊
 router.get('/food/:id', async (req, res) => {
   const { id } = req.params;
+  const url = `${config.fatSecret.apiUrl}?method=food.get.v2&format=json&food_id=${id}`;
+
   try {
-    const accessToken = await getAccessToken();
-    const response = await axios.get(config.fatSecret.apiUrl, {
-      params: {
-        method: 'food.get',
-        format: 'json',
-        food_id: id
-      },
-      headers: {
-        Authorization: `Bearer ${accessToken}`
+    console.log('正在獲取食物詳情:', { id });
+    oa.get(url, null, null, (err, data) => {
+      if (err) {
+        console.error('獲取食物詳情失敗:', {
+          status: err.statusCode,
+          data: err.data,
+          message: err.message
+        });
+        return res.status(500).json({
+          error: 'Failed to get food details',
+          details: err.data || err.message
+        });
       }
+      console.log('食物詳情成功:', data);
+      res.json(JSON.parse(data));
     });
-    console.log('食物詳情成功:', response.data);
-    res.json(response.data);
   } catch (error) {
     console.error('獲取食物詳情失敗:', {
-      status: error.response?.status,
-      data: error.response?.data,
       message: error.message
     });
-    const errorMessage = error.response?.data?.error?.message || error.message;
     res.status(500).json({
       error: 'Failed to get food details',
-      details: errorMessage
+      details: error.message
     });
   }
 });
