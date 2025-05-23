@@ -1,0 +1,20 @@
+/var/www/html/hw4/
+├── backend/
+│   ├── app.js              # Express 主應用檔案，啟動伺服器
+│   ├── routes/
+│   │   └── api.js          # API 路由，處理 FatSecret API 請求（例如 /api/food/:id）
+├── config/
+│   └── config.js           # 配置文件，可能處理 FatSecret API 憑證或環境變數
+├── public/
+│   ├── index.html          # 前端主頁面，包含搜尋欄、導航欄、結果表格等
+│   ├── js/
+│   │   └── main.js         # 前端 JavaScript，處理 AJAX 請求、分頁、圓形圖、收藏列表
+│   ├── css/
+│   │   └── styles.css      # 前端樣式，定義表格、進度條、響應式佈局
+│   └── assets/
+│       ├── food.jpg        # Banner 或食物圖片
+│       └── loading.gif     # 進度條動畫
+├── .env                    # 環境變數檔案，包含 FatSecret API 憑證
+├── package.json            # Node.js 專案依賴（Express、axios 等）
+├── [node_modules/]         # 依賴模組（伺服器端，npm install 生成）
+└── start.sh                # 自訂啟動腳本（包含 Nginx 和 PM2 命令）
