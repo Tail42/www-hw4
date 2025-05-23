@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const apiRoutes = require('./routes/api');
+const apiRoutes = require('./backend/routes/api');
 
 const app = express();
 
@@ -11,12 +11,12 @@ app.use(cors({
     methods: ['GET', 'POST'],
 }));
 app.use(express.json());
-app.use('/hw4', express.static(path.join(__dirname, '../public'))); // 靜態檔案路徑以 /hw4 為前綴
+app.use('/hw4', express.static(path.join(__dirname, './public'))); // 靜態檔案路徑以 /hw4 為前綴
 
 // 路由
 app.use('/hw4/api', apiRoutes); // API 路由以 /hw4/api 為前綴
 app.get('/hw4/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
+    res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 // 錯誤處理

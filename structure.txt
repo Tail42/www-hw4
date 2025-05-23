@@ -17,4 +17,3 @@
 ├── .env                    # 環境變數檔案，包含 FatSecret API 憑證
 ├── package.json            # Node.js 專案依賴（Express、axios 等）
 ├── [node_modules/]         # 依賴模組（伺服器端，npm install 生成）
-└── start.sh                # 自訂啟動腳本（包含 Nginx 和 PM2 命令）
