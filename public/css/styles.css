@@ -80,7 +80,7 @@ nav h1 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#search-btn, #favorite-btn, #prev-btn, #next-btn, #back-btn, #favorites-back-btn {
+#search-btn, #favorite-btn, #prev-btn, #next-btn, #back-btn {
   padding: 12px 24px;
   cursor: pointer;
   background-color: #007bff;
@@ -91,7 +91,7 @@ nav h1 {
   transition: background-color 0.3s ease;
 }
 
-#search-btn:hover, #favorite-btn:hover, #prev-btn:hover, #next-btn:hover, #back-btn:hover, #favorites-back-btn:hover {
+#search-btn:hover, #favorite-btn:hover, #prev-btn:hover, #next-btn:hover, #back-btn:hover {
   background-color: #0056b3;
 }
 
@@ -123,32 +123,6 @@ nav h1 {
 
 .add-btn:hover {
   background-color: darkblue;
-}
-
-.remove-btn {
-  background-color: pink;
-  color: black;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.remove-btn:hover {
-  background-color: #ffb6c1;
-}
-
-.delete-btn {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.delete-btn:hover {
-  background-color: #c82333;
 }
 
 table {
@@ -199,37 +173,30 @@ tr:hover {
   height: 50px;
 }
 
-#food-details, #favorites-section {
+#food-details {
   width: 80%;
   margin: 40px auto;
 }
 
-#back-btn, #favorites-back-btn {
+#back-btn {
   margin-bottom: 20px;
 }
 
-#food-name, #favorites-section h2 {
+#food-name {
   font-size: 28px;
   color: #333;
   text-align: center;
   margin: 20px 0;
 }
 
-#pie-chart, #favorite-nutrition {
+#pie-chart {
   text-align: center;
 }
 
-#pie-chart h3, #favorite-nutrition h3 {
+#pie-chart h3 {
   font-size: 24px;
   color: #333;
-  margin-bottom: 10px;
-}
-
-#favorite-food-name {
-  font-size: 24px;
-  color: #333;
-  margin: 10px 0;
-  text-align: center;
+  margin-bottom: 20px;
 }
 
 #serving-select {
@@ -278,29 +245,6 @@ tr:hover {
   margin-right: 10px;
 }
 
-#progress-bar {
-  width: 80%;
-  height: 20px;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 10px auto;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-#progress-bar.active .progress-bar-fill {
-  width: 0;
-  height: 100%;
-  background-color: #007bff;
-  animation: progress 1s ease-in-out forwards;
-}
-
-@keyframes progress {
-  0% { width: 0; }
-  100% { width: 100%; }
-}
-
 /* 響應式設計 */
 @media (max-width: 768px) {
   .banner {
@@ -329,13 +273,5 @@ tr:hover {
   #nutrition-chart {
     max-width: 150px;
     max-height: 150px;
-  }
-
-  table, #progress-bar {
-    width: 95%;
-  }
-
-  #favorite-food-name {
-    font-size: 20px;
   }
 }
